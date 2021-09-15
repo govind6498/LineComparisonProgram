@@ -1,67 +1,53 @@
 package com.bridgelabz.linecomparisonprogram;
-
-import bridgelabz.Line;
-
 public class LineComparison {
-	class Point{
-		double x,y;
-		public Point(double x,double y) {
-			this.x=x;
-			this.y=y;
-		}
-	}
-	Point p1,p2;
-	double x1,x2,y1,y2;
-	public LineComparison(double xStartPoint,double xEndPoint,double yStartPoint,double yEndPoint){
-		this.p1=new Point(xStartPoint,yStartPoint);
-		this.p2=new Point(xEndPoint,yEndPoint);
-	}
-	public double getLegth() {
-		return Math.round(Math.sqrt(Math.pow(p2.x-p1.y, 2)+Math.pow(p1.y-p2.y,2)));
+	int xstartPoint, ystartPoint, xendPoint, yendPoint;
+	Double length;
+
+
+	public LineComparison(int x1, int y1, int x2, int y2){
+		this.xstartPoint = x1;
+		this.ystartPoint = y1;
+		this.xendPoint = x2;
+		this.yendPoint = y2;
 
 	}
-	public boolean equals(LineComparison L) {
-		Double len1=this.getLegth();
-		Double len2=L.getLegth();
-		return len1.equals(len2);
+
+	public void calculateLength() {
+		length = Math.sqrt((xendPoint-xstartPoint)*(xendPoint-xstartPoint) + (yendPoint-ystartPoint)*(yendPoint-ystartPoint));
+		System.out.println("x1 : "+xstartPoint);
+		System.out.println("y1 : "+ystartPoint);
+		System.out.println("x2 : "+xendPoint);
+		System.out.println("y2 : "+yendPoint);
+		System.out.println("Length Of The Line is : "+length);
+
 	}
 
-	public int compareTo(LineComparison L) {
-		Double len1=this.getLegth();
-		Double len2=L.getLegth();
-		return len1.compareTo(len2);
+	public void isEqual(LineComparison line2) {
+		boolean isEqual = (this.length).equals(line2.length);
+		if(isEqual)
+			System.out.println("The Lines are equal");
+		else
+			System.out.println("The Lines are not equal");
+	}
+
+	public void compareTheLines(LineComparison line2) {
+		int compareValue = (this.length).compareTo(line2.length);
+		if(compareValue < 0)
+			System.out.println("Line 1 is smaller than Line 2");
+		else if(compareValue == 0)
+			System.out.println("Line 1 is equal to Line 2");
+		else
+			System.out.println("Line 1 is greater than Line 2");
 	}
 
 	public static void main(String[] args) {
-		System.out.println("Welcome to Line Comparison Computation Program on Master Branch ");
-		LineComparison L1=new LineComparison(7,20,4.8,4.4);
-		LineComparison L2=new LineComparison(1.5,1,5.3,5.4);
 
-		//use case 1
-		System.out.println("Length of Line 1="+L1.getLegth()+"\t"+"Length of Line 2="+L2.getLegth());
-		System.out.println();
+		LineComparison line1 = new LineComparison(2, 3, 2, 8);
+		LineComparison line2 = new LineComparison(2, 3, 4, 8);
 
-		//Use case 2
-		boolean result1=L1.equals(L2);
-		if(result1==true) {
-			System.out.println("Length of Line 1 is Equal to Length of Line 2");
-		}
-		else {
-			System.out.println("Length of Line 1 is not equals to Line 2.");  
-		}
-
-		//use case 3
-		int result2=L1.compareTo(L2);
-		if(result2==0) {
-			System.out.println("Length of Line 1 is equals to Line 2.");  
-		}
-		else if(result2>0) {
-			System.out.println("Line 1 is greater than  Line 2.");  
-		}
-		else {
-			System.out.println("Line 1 is less than Line 2.");  
-		}
-
-
+		line1.calculateLength();
+		line2.calculateLength();
+		line1.isEqual(line2);
+		line1.compareTheLines(line2);
 	}
 }
